@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Drawing App</title>
+  <link rel="stylesheet" href="{% static 'app1/style.css' %}">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+  <canvas id="canvas" width="400" height="300">
+
+  </canvas>
+  
+  <div class="toolbox" id="toolbox_">
+    <button id="decrease">-</button>
+    <span id="size">10</span>
+    <button id="increase">+</button>
+    <input type="color" id="color" />
+    <button id="clear">X</button>
+    <button id="saveButton">S</button>
+  </div>
+<!-- partial -->
+  <script  src="{% static 'app1/script.js' %}"></script>
+  </body>
+</html>
