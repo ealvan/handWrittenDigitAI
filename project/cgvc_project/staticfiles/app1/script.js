@@ -129,6 +129,12 @@ function addPredictButton(){
       // Process the received data
       console.log("PREDICT");
       console.log(data);
+      const paragraph = document.querySelector("#prediction p");
+      // Append a number to the content
+      const number = data["predictions"]; // Replace this with your desired number
+      paragraph.textContent += " " + number;
+      console.log("AHHHH");
+      console.log(data["predictions"]);
     })
     .catch(error => console.error('Error:', error));
   });

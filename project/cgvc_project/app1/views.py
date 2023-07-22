@@ -29,6 +29,10 @@ def drawer(request):
     context = {}
     return render(request, 'drawer.html', context)
 
+def newdrawer(request):
+    context = {}
+    return render(request, 'drawerv2.html', context)
+
 @csrf_exempt
 def save_image(request):
     if request.method == 'POST':
