@@ -29,14 +29,28 @@ def process_image(path_img):
         kernel = np.ones(kernel, np.uint8)
         dilated_img = cv2.dilate(img, kernel, iterations=iterations)
         return dilated_img
+    def thresholding(img,threshold_value):
+        _, thresholded_image = cv2.threshold(image, threshold_value, 255, cv2.THRESH_BINARY)
+        return thresholded_image
+    def adaptive_threshold_image(image):
+        # Apply adaptive thresholding using cv2.adaptiveThreshold()
+        thresholded_image = cv2.adaptiveThreshold(image, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 2)
+        return thresholded_image
 
     def preprocess(img):
         desired_size = (28,28)
         img = cv2.resize(img, desired_size)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         img = dilate(img,(1,1),4)
+        # img = thresholding(img,25)
+        try:
+            img = adaptive_threshold_image(img)
+        except Exception as e:
+            print("Error ocurrido en adaptive_threshold_image")
+            print(e)
         img = cv2.bitwise_not(img)
-        saveImg(img,'dilated_and_inverted_img.png')
+        saveImg(img,"dilated_and_thresholded_inverted_img.png")
+        # saveImg(img,'dilated_and_inverted_img.png')
         img = img.astype('float32') / 255.0
         return img
 
