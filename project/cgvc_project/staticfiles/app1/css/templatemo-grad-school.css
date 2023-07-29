@@ -20,6 +20,9 @@ ol {
   color:#f5a425;
   background-color: cadetblue;
 }
+#text > div > p {
+  font-size: 30px;
+}
 /* CANVAS */
 #text {
   background-color: #093ec4;
@@ -28,7 +31,7 @@ ol {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  width: 60%;
   margin: 0;
 }
 

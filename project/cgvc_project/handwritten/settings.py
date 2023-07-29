@@ -70,6 +70,7 @@ TEMPLATES = [
         },
     },
 ]
+LOGIN_REDIRECT_URL = "/admin"
 
 WSGI_APPLICATION = 'handwritten.wsgi.application'
 

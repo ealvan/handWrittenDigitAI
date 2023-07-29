@@ -1,0 +1,51 @@
+
+body {
+background-image: url(https://static.vecteezy.com/system/resources/previews/013/138/406/original/meadow-panorama-3d-illustration-fantastic-landscape-with-rainbow-on-green-valley-kids-background-colorful-cute-scenery-with-flowers-spring-grass-blue-sky-for-children-s-sites-or-printing-free-vector.jpg);
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+position: relative;
+}
+.title {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    margin: 0;
+}
+.title h1 {
+    text-align: center;
+}
+.container {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .central-card {
+    margin-bottom: 20px;
+    
+  }
+  
+  .horizontal-cards {
+    display: flex;
+  }
+
+  .flip-card {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+#sortear {
+  width: 50px;
+}

@@ -1,0 +1,239 @@
+<!-- templates/registration/login.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Login/Register Form</title>
+	<style>
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+	html,
+	body {
+		min-height: 100%;
+	}
+	body {
+		margin: 0;
+		padding: 0;
+		font-family: sans-serif;
+		color: white;
+		background-color: black;
+		background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+							url(https://media.tenor.com/u4zKpWgQh-MAAAAd/children-playing.gif);
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center center;
+	}
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+	div,
+	form {
+		background-color: inherit;
+		/*position: relative;*/
+	}
+	section {
+		display: flex;
+		height: 100vh;
+		width: 100%;
+		justify-content: center;
+		align-items: center;
+	}
+	.login-page {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: #334;
+		visibility: hidden;
+		opacity: 0;
+		transition: .5s ease .5s;
+	}
+	.login-page .form {
+		position: absolute;
+		left: 50%;
+		top: -500px;
+		transform: translate(-50%, -50%);
+		transition: .5s ease-in;
+		width: 95%;
+		max-width: 300px;
+		padding: 10px;
+		color: white;
+	}
+	.login-page:target .form {
+		transition: .5s ease-in .5s;
+		top: 50%;
+	}
+	.login-page:target {
+		visibility: visible;
+		opacity: 1;
+		transition: .5s ease;
+	}
+	.login-page .form .close {
+		text-align: right;
+	}
+	.login-page .form .close h1 {
+		display: inline-block;
+		margin: 0;
+		padding: 0;
+		width: 40px;
+		text-align: center;
+		border-radius: 50%;
+		box-shadow: -2px -2px 6px rgba(255,255,255,.2), 2px 2px 6px rgba(0,0,0,.8);
+	}
+    section > h1 {
+        font-size: 50px;
+    }
+	.login-page .form .close a {
+		text-decoration: none;
+		color: white;
+	}
+	.login-page .form #register {
+		display: none;
+	}
+	.login-page .form input,
+	.login-page .form button {
+		width: 95%;
+		padding: 10px;
+		margin: 5px 0;
+		border: none;
+		outline: none;
+		letter-spacing: 1px;
+		border-radius: 100vmax;
+		background-color: #334;
+		color: inherit;
+	}
+	.login-page .form input::placeholder {
+		color: #667;
+	}
+	.login-page .form button:active,
+	.login-page .form input {
+		-webkit-appearance: none; /* fixes bug in Safari on iOS */
+		box-shadow: inset -2px -2px 6px rgba(255,255,255,.2), inset 2px 2px 6px rgba(0,0,0,.8);
+	}
+	.login-page .form button {
+		width: 50%;
+		margin-top: 8px;
+		box-shadow: -2px -2px 6px rgba(255,255,255,.2), 2px 2px 6px rgba(0,0,0,.8);
+		letter-spacing: 3px;
+		background-color: transparent;
+	}
+	.login-page .form #register + label {
+		width: 100%;
+		display: block;
+	}
+	.login-page .form #register + label span {
+		display: inline-block;
+		width: 49%;
+		padding: 10px;
+		margin: 10px 0;
+		text-align: center;
+		border-radius: 100vmax;
+		letter-spacing: 3px;
+		transition: .5s;
+		cursor: pointer;
+		border: none;
+		outline: none;
+	}
+	.login-page .form #register + label .login {
+		box-shadow: inset -2px -2px 6px rgba(255,255,255,.2), inset 2px 2px 6px rgba(0,0,0,.8);
+	}
+	.login-page .form #register + label .register {
+		box-shadow: -2px -2px 6px rgba(255,255,255,.2), 2px 2px 6px rgba(0,0,0,.8);
+	}
+	.login-page .form #register:checked + label .login {
+		box-shadow: -2px -2px 6px rgba(255,255,255,.2), 2px 2px 6px rgba(0,0,0,.8);
+	}
+	.login-page .form #register:checked + label .register {
+		box-shadow: inset -2px -2px 6px rgba(255,255,255,.2), inset 2px 2px 6px rgba(0,0,0,.8);
+	}
+	.login-page .form .card {
+		position: relative;
+		width: 100%;
+		height: 280px;
+	}
+	.login-page .form .wrap {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		overflow: hidden;
+	}
+	.login-page .form .front,
+	.login-page .form .back {
+		position: absolute;
+		top: 5%;
+		width: 100%;
+		height: 90%;
+		overflow: hidden;
+		backface-visibility: hidden;
+		transition: transform .5s;
+		background-color: transparent;
+		padding: 10px;
+		box-shadow: -2px -2px 6px rgba(255,255,255,.2), 2px 2px 6px rgba(0,0,0,.8);
+		border-radius: 30px;
+		background-image: linear-gradient(135deg,#334,#445,#334);
+	}
+	.login-page .form .front {
+		transform: perspective(100vmax) rotateY(0deg);
+	}
+	.login-page .form .back {
+		transform: perspective(100vmax) rotateY(180deg);
+	}
+	.login-page .form #register:checked ~ .card .front {
+		transform: perspective(100vmax) rotateY(-180deg);
+	}
+	.login-page .form #register:checked ~ .card .back {
+		transform: perspective(100vmax) rotateY(0deg);
+	}
+	</style>
+</head>
+<body>
+
+	<section>
+		<h1><a href="#id-login-form">LOGIN</a></h1>
+	</section>
+
+	<div class="login-page" id="id-login-form">
+		<div class="form">
+			<div class="close">
+				<h1><a href="#!">&times;</a></h1>
+			</div>
+			<input type="checkbox" id="register" />
+			<label for="register">
+				<span class="login">LOGIN</span>
+				<span class="register">REGISTER</span>
+			</label>
+			<div class="card">
+				<div class="front">
+					<form action="{% url 'game' %}" method="post">{% csrf_token %}<!-- LOGIN FORM -->
+						<div class="wrap">
+							<input type="email" name="email" autocomplete="off" placeholder="EMAIL" required />
+							<input type="password" name="pwd" placeholder="PASSWORD" required />
+							<button type="submit">LOGIN</button>
+						</div>
+					</form>
+				</div>
+				<div class="back">
+					<form action="/accounts/register/" method="post"><!-- REGISTER FORM -->
+						<div class="wrap">
+							<input type="text" name="name" autocomplete="off" placeholder="NAME" required />
+							<input type="email" name="email" autocomplete="off" placeholder="EMAIL" required />
+							<input type="password" name="pwd" placeholder="PASSWORD" required />
+							<input type="password" name="confirm" placeholder="CONFIRM PASSWORD" required />
+							<button type="submit">REGISTER</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

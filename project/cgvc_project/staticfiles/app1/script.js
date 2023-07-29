@@ -5,6 +5,7 @@ const sizeElement = document.getElementById("size");
 const colorElement = document.getElementById("color");
 const clearElement = document.getElementById("clear");
 const ctx = canvas.getContext("2d");
+// const paragraph = document.querySelector("#prediction p");
 
 let size = 10;
 let color = "black";
@@ -68,7 +69,15 @@ decreaseButton.addEventListener("click", () => {
 colorElement.addEventListener("change", (e) => (color = e.target.value));
 
 clearElement.addEventListener("click", () =>
-  ctx.clearRect(0, 0, canvas.width, canvas.height)
+  {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    // let content = paragraph.textContent;
+    let last_character = content[content.length-1];
+    if(isNumber(last_character)){
+      content = content.slice(0,-1);
+    }
+    // paragraph.textContent = content;
+  }
 );
 
 //-------------------------------------------------------------------
@@ -113,6 +122,19 @@ function sendDataToServer(imageData) {
 
 //-------------------------------------------------------------------
 var has = false;
+function isNumber(input) {
+  // Use parseInt or parseFloat to convert the input to a number
+  const numberValue = parseFloat(input);
+
+  // Check if the converted number is NaN (Not a Number)
+  // If it is NaN, then the input is not a valid number
+  return !isNaN(numberValue);
+}
+
+
+function getRandom(){
+
+}
 function addPredictButton(){
   const saveButton = document.createElement('button');
   // Set the button's ID and text content
@@ -129,10 +151,14 @@ function addPredictButton(){
       // Process the received data
       console.log("PREDICT");
       console.log(data);
-      const paragraph = document.querySelector("#prediction p");
       // Append a number to the content
       const number = data["predictions"]; // Replace this with your desired number
-      paragraph.textContent += " " + number;
+      if(numeroAleatorio != -1 && number == numeroAleatorio){
+        console.log("ESTAS BIEN!!!");
+      }else{
+        console.log("ESTAS MAL!!!");
+      }
+      // paragraph.textContent += " " + number;
       console.log("AHHHH");
       console.log(data["predictions"]);
     })
@@ -146,4 +172,20 @@ function addPredictButton(){
   toolbox.appendChild(saveButton);
 
   return true;
+}
+//-----------------------------------------------------
+var numeroAleatorio = -1;
+const testWriting = document.getElementById("test-writing");
+
+function generarNumeroAleatorio() {
+    return Math.floor(Math.random() * 10);
+}
+
+function getTest(){
+    numeroAleatorio = generarNumeroAleatorio();
+    const mensaje = document.createElement("p");
+    mensaje.textContent = `El número es ${numeroAleatorio}`;
+    mensaje.classList.add("lead");
+    testWriting.appendChild(mensaje);
+    return numeroAleatorio;
 }

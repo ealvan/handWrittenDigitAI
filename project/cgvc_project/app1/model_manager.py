@@ -41,15 +41,18 @@ def process_image(path_img):
         desired_size = (28,28)
         img = cv2.resize(img, desired_size)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        saveImg(img,"1_gray_image.png")
         img = dilate(img,(1,1),4)
+        saveImg(img,"2_gray_dilated.png")
         # img = thresholding(img,25)
         try:
             img = adaptive_threshold_image(img)
+            saveImg(img,"3_threshold_image.png")
         except Exception as e:
             print("Error ocurrido en adaptive_threshold_image")
             print(e)
         img = cv2.bitwise_not(img)
-        saveImg(img,"dilated_and_thresholded_inverted_img.png")
+        saveImg(img,"4_bitwise_not_img.png")
         # saveImg(img,'dilated_and_inverted_img.png')
         img = img.astype('float32') / 255.0
         return img

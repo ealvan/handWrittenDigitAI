@@ -1,3 +1,4 @@
+
 const canvas = document.getElementById("canvas");
 const increaseButton = document.getElementById("increase");
 const decreaseButton = document.getElementById("decrease");
@@ -5,7 +6,11 @@ const sizeElement = document.getElementById("size");
 const colorElement = document.getElementById("color");
 const clearElement = document.getElementById("clear");
 const ctx = canvas.getContext("2d");
-const paragraph = document.querySelector("#prediction p");
+var numeroAleatorio = -1;
+const testWriting = document.getElementById("test-writing");
+const sortearButton = document.getElementById("sortear");
+
+// const paragraph = document.querySelector("#prediction p");
 
 let size = 10;
 let color = "black";
@@ -71,12 +76,12 @@ colorElement.addEventListener("change", (e) => (color = e.target.value));
 clearElement.addEventListener("click", () =>
   {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    let content = paragraph.textContent;
-    let last_character = content[content.length-1];
-    if(isNumber(last_character)){
-      content = content.slice(0,-1);
-    }
-    paragraph.textContent = content;
+    // let content = paragraph.textContent;
+    // let last_character = content[content.length-1];
+    // if(isNumber(last_character)){
+    //   content = content.slice(0,-1);
+    // }
+    // paragraph.textContent = content;
   }
 );
 
@@ -115,6 +120,7 @@ function sendDataToServer(imageData) {
     body: JSON.stringify({ "image_data": imageData }),
   }).then(response => response.json())
   .then(data => {
+    showSwal("success-message","Guardado!","Se ha enviado tu test a la IA");
     console.log(data); // You can handle the server response here
   }).catch(error => console.error('Error:', error));
 }
@@ -129,6 +135,11 @@ function isNumber(input) {
   // Check if the converted number is NaN (Not a Number)
   // If it is NaN, then the input is not a valid number
   return !isNaN(numberValue);
+}
+
+
+function getRandom(){
+
 }
 function addPredictButton(){
   const saveButton = document.createElement('button');
@@ -148,12 +159,21 @@ function addPredictButton(){
       console.log(data);
       // Append a number to the content
       const number = data["predictions"]; // Replace this with your desired number
-      
-      paragraph.textContent += " " + number;
-      console.log("AHHHH");
+      if(numeroAleatorio != -1 && number === numeroAleatorio){
+        console.log("ESTAS BIEN!!!");
+        showSwal("success-message","Correcto!","Has ingresado el número correcto");
+      }else{
+        showSwal("error-message","Error",`La IA dice que el número correcto era: ${number}`);
+        console.log("ESTAS MAL!!!");
+      }
+      // paragraph.textContent += " " + number;
+      // console.log("AHHHH");
       console.log(data["predictions"]);
     })
-    .catch(error => console.error('Error:', error));
+    .catch(error => {
+      console.error('Error:', error);
+      showSwal("error-type","Hubo Error tecnico", "Puedes intentar de nuevo o notificarnos a servicioTecnico@gmail.com");
+    });
   });
 
   // Get the parent element (div with class "toolbox")
@@ -163,4 +183,76 @@ function addPredictButton(){
   toolbox.appendChild(saveButton);
 
   return true;
+}
+//-----------------------------------------------------
+
+function generarNumeroAleatorio() {
+    return Math.floor(Math.random() * 10);
+}
+
+function deleteAllChildren(element){
+  while (element.firstChild) {
+    if(element.firstChild.tagName !== "BUTTON")
+      element.removeChild(element.firstChild);
+  }
+}
+
+function getTest(){
+    // deleteAllChildren(testWriting);
+    numeroAleatorio = generarNumeroAleatorio();
+    const mensaje = document.createElement("p");
+    mensaje.textContent = `El número es ${numeroAleatorio}`;
+    mensaje.classList.add("lead");
+    mensaje.classList.add("text-center", "fw-bold");
+
+    mensaje.style.color = "black";
+    mensaje.style.fontSize='40px';
+    testWriting.appendChild(mensaje);
+}
+getTest();
+
+function showSwal(type,title,text) {
+  // 'use strict';
+   if (type === 'success-message') {
+    swal({
+      title: title,
+      text: text,
+      type: 'success',
+      button: {
+        text: "Continue",
+        value: true,
+        visible: true,
+        className: "btn btn-primary"
+      }
+    })
+
+  }else if(type=="error-message"){
+    swal({
+      title: title,
+      text: text,
+      type: 'error',
+      button: {
+        text: "Continue",
+        value: true,
+        visible: true,
+        className: "btn btn-danger"
+      }
+    })
+  }
+  else if(type=='info-message'){
+    swal({
+      title: '¿De qué trata el juego?',
+      text: 'El juego consiste en escribir el número',
+      type: 'info',
+      button: {
+        text: "OK",
+        value: true,
+        visible: true,
+        className: "btn btn-danger"
+      }
+    })
+  }
+  else{
+      swal("Error occured !");
+  } 
 }

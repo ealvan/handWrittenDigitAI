@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Layout</title>
+  <link rel="stylesheet" href="{% static 'app1/css/game.css' %}">
+  <link rel="stylesheet" href="{% static 'app1/css/card.css' %}">
+  <link rel="stylesheet" href="{% static 'app1/css/central_card.css' %}">
+    <!-- Sweet ALERT -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'app1/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'app1/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'app1/css/templatemo-grad-school.css' %}">
+    <link rel="stylesheet" href="{% static 'app1/css/owl.css' %}">
+    <link rel="stylesheet" href="{% static 'app1/css/lightbox.css' %}">
+  
+</head>
+<body>
+    <div class="title">
+        <h1 class="display-2">Bienvenido al videojuego</h1>
+    </div>
+    <div class="container">    
+        <div class="item item--3" id="text">
+            <div class="row" >
+                <!-- HERE IS THE MAIN CODE
+                <div id="prediction">
+                  <p class="font-weight-bold">LA IA DICE QUE SU NÚMERO ES:</p>
+                </div> -->
+                <div class="container">
+                    <div id="test-writing" class="d-flex justify-content-center align-items-center">
+                        <button class="'btn btn-primary" value="Sortear" onclick="getTest()" id="sortear"></button>
+                    </div>
+                    <canvas id="canvas" width="400" height="300">
+                    </canvas>
+                    <div class="toolbox" id="toolbox_">
+                        <button id="decrease">-</button>
+                        <span id="size">10</span>
+                        <button id="increase">+</button>
+                        <input type="color" id="color" />
+                        <button id="clear">X</button>
+                        <!-- <button id="saveButton">S</button> -->
+                        <button class="btn btn-outline-success" id="saveButton">S</button>
+                    </div>
+                </div>
+            </div>          
+        </div>                
+    </div>
+    <div class="container">
+        <div class="container">
+            <button class="btn btn-warning" id="proceso">Descubrir proceso </button>
+        </div>
+        <div class="horizontal-cards">
+
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <p class="title">FLIP CARD</p>
+                    </div>
+                    <div class="flip-card-back">
+                        <p class="title">BACK</p>
+                        <p>Leave Me</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <p class="title">FLIP CARD</p>
+                        <p>Hover Me</p>
+                    </div>
+                    <div class="flip-card-back">
+                        <p class="title">BACK</p>
+                        <p>Leave Me</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <p class="title">FLIP CARD</p>
+                        <p>Hover Me</p>
+                    </div>
+                    <div class="flip-card-back">
+                        <p class="title">BACK</p>
+                        <p>Leave Me</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <p class="title">FLIP CARD</p>
+                </div>
+                <div class="flip-card-back">
+                    <p class="title">BACK</p>
+                    <p>Leave Me</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Scripts -->
+    <script  src="{% static 'app1/script.js' %}"></script>
+    <script  src="{% static 'app1/js/getImages.js' %}"></script>
+    <script src="{% static 'app1/js/game.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+</body>
+</html>

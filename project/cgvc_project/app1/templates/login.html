@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="">
+        <title>Login - CGVC</title>
+        <!-- Bootstrap core CSS -->
+        <link href="{% static 'app1/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+        <!-- Additional CSS Files -->
+        <link rel="stylesheet" href="{% static 'app1/css/fontawesome.css' %}">
+        <link rel="stylesheet" href="{% static 'app1/css/templatemo-grad-school.css' %}">
+        <link rel="stylesheet" href="{% static 'app1/css/owl.css' %}">
+        <link rel="stylesheet" href="{% static 'app1/css/lightbox.css' %}">
+
+    </head>
+    <body>
+        <section class="section coming-soon" data-section="section3">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-5 mx-auto">
+                  <div class="center-content">
+                    <div class="top-content">
+                      <h6>Login into account</h6>
+                    </div>
+                    <form id="contact" action="" method="post">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <fieldset>
+                            <input name="name" type="text" class="form-control" id="name" placeholder="Your Name" required="True">
+                          </fieldset>
+                        </div>
+                        <div class="col-md-12">
+                          <fieldset>
+                            <input name="password" type="password" class="form-control" id="password" placeholder="Your Password" required="True">
+                          </fieldset>
+                        </div>
+                        <div class="col-md-12">
+                          <fieldset>
+                            <button type="submit" id="form-submit" class="button">Login</button>
+                          </fieldset>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>        
+    </body>
+</html>

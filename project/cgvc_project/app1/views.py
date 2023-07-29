@@ -25,6 +25,10 @@ def index(request):
     }
     return render(request, 'paint.html', context)
 
+def login(request):
+    context = {}
+    return render(request, 'login.html', context)
+    
 def drawer(request):
     context = {}
     return render(request, 'drawer.html', context)
@@ -32,6 +36,10 @@ def drawer(request):
 def newdrawer(request):
     context = {}
     return render(request, 'drawerv2.html', context)
+
+def game(request):
+    context = {}
+    return render(request,'game.html', context)
 
 @csrf_exempt
 def save_image(request):
@@ -52,6 +60,22 @@ def save_image(request):
                 f.write(base64.decodebytes(image_data))
             return JsonResponse({'message': 'Image saved successfully.'})
     return JsonResponse({'error': 'Invalid request.'}, status=400)
+
+def request_img(request):
+    path = settings.MEDIA_ROOT
+    files = [f for f in os.listdir(path)]
+    images_data = {}
+    for f in files:
+        with open(os.path.join(settings.MEDIA_ROOT,f),'rb') as imgfile:
+            encoded_string = base64.b64encode(imgfile.read()).decode('utf-8')
+            # images_data.append(encoded_string)
+            images_data[f] = encoded_string
+    response_data = images_data
+    return JsonResponse(response_data)
+    # with os.scandir(path) as it:
+    #     for entry in it:
+    #         if entry.is_file():
+    #             files.append()
 
 def predict_image(request):
     # Get the image data from the request, process it as needed
